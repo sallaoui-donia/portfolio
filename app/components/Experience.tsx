@@ -68,65 +68,88 @@ export default function Experience() {
   };
 
   return (
-    <section id="expériences" className="py-20">
-             <motion.div
-               initial={{ opacity: 0 }}
-               whileInView={{ opacity: 1 }}
-               viewport={{ once: true }}
-               className="text-center mb-16"
-             >
-               <h2 className="text-4xl font-bold mb-4">Mon <span className="text-blue-500">Expérience</span></h2>
-               <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                 Mon parcours professionnel et mes réalisations
-               </p>
-             </motion.div>
-   
-             <div className="relative">
-               {/* Timeline bar */}
-               <div className="absolute left-1/2 h-full w-1 bg-gradient-to-b from-blue-500 to-cyan-400"></div>
-   
-               {experiences.map((exp, i) => (
-                 <motion.div
-                   key={i}
-                   initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
-                   whileInView={{ opacity: 1, x: 0 }}
-                   viewport={{ once: true }}
-                   transition={{ duration: 0.5 }}
-                   className={`mb-12 flex ${i % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
-                 >
-                   <div className={`w-1/2 ${i % 2 === 0 ? 'pr-8' : 'pl-8'}`}>
-                     <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg relative">
-                       <div className={`absolute top-6 ${i % 2 === 0 ? '-right-2' : '-left-2'} w-4 h-4 bg-blue-500 transform rotate-45`}></div>
-                       <div className="flex items-center gap-4 mb-4">
-                         <div className="p-3 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-500">
-                           <FaBriefcase />
-                         </div>
-                         <div>
-                           <h3 className="text-xl font-bold">{exp.title}</h3>
-                           <p className="text-blue-500">{exp.company}</p>
-                         </div>
-                       </div>
-                       <div className="flex items-center gap-2 text-gray-500 mb-4">
-                         <FaCalendarAlt />
-                         <span>{exp.period}</span>
-                       </div>
-                       <ul className="list-disc pl-5 space-y-1">
-  {exp.description.map((item, index) => (
-    <li key={index}>{item}</li>
-  ))}
-</ul>
-                       <div className="flex flex-wrap gap-2">
-                         {exp.tags.map((tag, j) => (
-                           <span key={j} className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-sm">
-                             {tag}
-                           </span>
-                         ))}
-                       </div>
-                     </div>
-                   </div>
-                 </motion.div>
-               ))}
-             </div>
-           </section>
+    <section id="expériences" className="py-12 md:py-20 px-4">
+      {/* Titre */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="text-center mb-12 md:mb-16"
+      >
+        <h2 className="text-3xl md:text-4xl font-bold mb-3 md:mb-4">
+          Mon <span className="text-blue-500">Expérience</span>
+        </h2>
+        <p className="text-base md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          Mon parcours professionnel et mes réalisations
+        </p>
+      </motion.div>
+
+      {/* Timeline */}
+      <div className="relative">
+        {/* Ligne de timeline - version desktop */}
+        <div className="hidden md:block absolute left-1/2 h-full w-1 bg-gradient-to-b from-blue-500 to-cyan-400"></div>
+
+        {experiences.map((exp, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5 }}
+            className="mb-8 md:mb-12 w-full"
+          >
+            {/* Conteneur mobile/desktop */}
+            <div className="flex flex-col md:flex-row items-start relative">
+              {/* Point de timeline mobile */}
+              <div className="md:hidden absolute left-6 top-6 w-3 h-3 bg-blue-500 rounded-full -ml-1.5 z-10"></div>
+
+              {/* Carte d'expérience */}
+              <div className={`w-full md:w-1/2 ${i % 2 === 0 ? 'md:pr-8 md:mr-auto' : 'md:pl-8 md:ml-auto'}`}>
+                <div className="bg-white dark:bg-gray-800 p-5 md:p-6 rounded-xl shadow-lg relative ml-8 md:ml-0">
+                  {/* Flèche desktop */}
+                  <div className={`hidden md:block absolute top-6 ${i % 2 === 0 ? '-right-2' : '-left-2'} w-4 h-4 bg-blue-500 transform rotate-45`}></div>
+                  
+                  {/* En-tête */}
+                  <div className="flex items-start gap-4 mb-3 md:mb-4">
+                    <div className="p-2 md:p-3 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-500 mt-1">
+                      <FaBriefcase className="text-sm md:text-base" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg md:text-xl font-bold">{exp.title}</h3>
+                      <p className="text-blue-500 text-sm md:text-base">{exp.company}</p>
+                    </div>
+                  </div>
+                  
+                  {/* Période */}
+                  <div className="flex items-center gap-2 text-gray-500 text-sm md:text-base mb-3 md:mb-4">
+                    <FaCalendarAlt className="flex-shrink-0" />
+                    <span>{exp.period}</span>
+                  </div>
+                  
+                  {/* Description */}
+                  <ul className="list-disc pl-5 space-y-1 text-sm md:text-base mb-3 md:mb-4">
+                    {exp.description.map((item, index) => (
+                      <li key={index} className="leading-snug">{item}</li>
+                    ))}
+                  </ul>
+                  
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-1 md:gap-2">
+                    {exp.tags.map((tag, j) => (
+                      <span 
+                        key={j} 
+                        className="px-2 py-0.5 md:px-3 md:py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-xs md:text-sm"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </section>
   );
 }
