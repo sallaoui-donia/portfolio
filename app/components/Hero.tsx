@@ -67,7 +67,7 @@ export default function Hero() {
                                     whileHover={{ y: -3 }}
                                     whileTap={{ scale: 0.98 }}
                                     href="/documents/cv_donia_salaoui.pdf"
-                                    download="CV_Donia_Salaoui_Ingenieur_Informatique.pdf"
+                                    download="SLDonia_DÉVELOPPEUR_REACT.JS & NODE.JS.pdf"
                                     aria-label="Télécharger le CV au format PDF"
                                     className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
                                 >
